@@ -4,6 +4,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 public class DemoApplication {
 	@Autowired
 	private KafkaTemplate<String, String> template;
-
+	@Autowired
+	private RabbitTemplate rabbitTemplate;
 	private final CountDownLatch latch = new CountDownLatch(4);
 
 	public static void main(String[] args) {
