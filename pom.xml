@@ -139,12 +139,14 @@
 				<executions>
 					<execution>
 						<id>build-image</id>
+						<phase>build</phase>
 						<goals>
 							<goal>build</goal>
 						</goals>
 					</execution>
 					<execution>
 						<id>tag-image</id>
+						<phase>docker:build</phase>
 						<goals>
 							<goal>tag</goal>
 						</goals>
@@ -155,6 +157,7 @@
 					</execution>
 					<execution>
 						<id>push-image</id>
+						<phase>docker:build</phase>
 						<goals>
 							<goal>push</goal>
 						</goals>
