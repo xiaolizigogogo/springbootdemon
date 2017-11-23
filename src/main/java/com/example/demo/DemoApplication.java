@@ -28,7 +28,7 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-@RequestMapping("test")
+	@RequestMapping("test")
 	public void run(String... args) throws Exception {
 		this.template.send("myTopic", "foo1");
 		this.template.send("myTopic", "foo2");
