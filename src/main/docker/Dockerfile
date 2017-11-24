@@ -12,4 +12,4 @@ RUN echo "http://mirrors.aliyun.com/alpine/v3.6/main" > /etc/apk/repositories \
 
 ADD @project.artifactId@-${PROJECT_VERSION}.jar @project.artifactId@.jar
 
-ENTRYPOINT ["nohup","java","-jar","/@project.artifactId@.jar","&"]
+ENTRYPOINT ["java","-jar","/@project.artifactId@.jar"]
