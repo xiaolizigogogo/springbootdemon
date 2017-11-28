@@ -2,7 +2,6 @@ package com.example.demo;
 
 import java.util.concurrent.CountDownLatch;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -45,7 +44,6 @@ public class DemoApplication {
 	}
 	@RequestMapping("queryMondb")
 	public void queryMondb(String... args) throws Exception {
-		mongoTemplate.createCollection(User.class);
 		String personName=mongoTemplate.getCollectionName(User.class);
 		User person = new User();
 		person.setAge(15);
@@ -65,9 +63,4 @@ public class DemoApplication {
 		log.info("All received");
 	}
 
-	@KafkaListener(topics = "myTopic")
-	public void listen(ConsumerRecord<?, ?> cr) throws Exception {
-		log.info(cr.toString());
-		latch.countDown();
-	}
 }
