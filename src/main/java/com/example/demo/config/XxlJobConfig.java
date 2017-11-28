@@ -1,11 +1,16 @@
 package com.example.demo.config;
 
-import com.xxl.job.core.executor.XxlJobExecutor;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.alibaba.druid.util.StringUtils;
+import com.xxl.job.core.executor.XxlJobExecutor;
 
 /**
  * 
@@ -29,7 +34,7 @@ public class XxlJobConfig {
     @Value("${spring.platform.task.job.executor.port}")
     private int port;
 
-    @Value("${xspring.platform.task.job.executor.logpath}")
+    @Value("${spring.platform.task.job.executor.logpath}")
     private String logpath;
 
     @Value("${spring.platform.task.job.accessToken}")
@@ -40,6 +45,9 @@ public class XxlJobConfig {
         logger.info(">>>>>>>>>>> job config init.");
         XxlJobExecutor xxlJobExecutor = new XxlJobExecutor();
         xxlJobExecutor.setIp(ip);
+        if(StringUtils.equals("local", ip)){
+        	  xxlJobExecutor.setIp(getHostNameForLiunx());
+        }
         xxlJobExecutor.setPort(port);
         xxlJobExecutor.setAppName(appname);
         xxlJobExecutor.setAdminAddresses(addresses);
@@ -47,5 +55,19 @@ public class XxlJobConfig {
         xxlJobExecutor.setAccessToken(accessToken);
         return xxlJobExecutor;
     }
+    public static String getHostNameForLiunx() {  
+        try {  
+            return (InetAddress.getLocalHost()).getHostName();  
+        } catch (UnknownHostException uhe) {  
+            String host = uhe.getMessage(); // host = "hostname: hostname"  
+            if (host != null) {  
+                int colon = host.indexOf(':');  
+                if (colon > 0) {  
+                    return host.substring(0, colon);  
+                }  
+            }  
+            return "UnknownHost";  
+        }  
+    }  
 
 }
