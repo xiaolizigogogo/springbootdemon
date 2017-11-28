@@ -118,9 +118,19 @@
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="ACCESS" />
 	</logger>
-		<logger name="org.springframework.data.redis" additivity="false">
+	<logger name="org.springframework.data.redis" additivity="false">
 		<level value="INFO" />
 		<!--daoFILE为实际定义的appender -->
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ACCESS" />
+	</logger>
+	<logger name="org.springframework.kafka" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ACCESS" />
+	</logger>
+		<logger name="org.apache.kafka" additivity="false">
+		<level value="INFO" />
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="ACCESS" />
 	</logger>
