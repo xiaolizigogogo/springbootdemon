@@ -9,7 +9,7 @@ RUN echo "http://mirrors.aliyun.com/alpine/v3.6/main" > /etc/apk/repositories \
     && apk add --no-cache procps unzip curl bash tzdata \
     && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone
-RUN mkdir /opt/data
+RUN mkdir -p /opt/data
 
 ADD @project.artifactId@-${PROJECT_VERSION}.jar @project.artifactId@.jar
 
